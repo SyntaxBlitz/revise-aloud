@@ -16,7 +16,7 @@ body {
 	font-size: 14pt;
 }
 
-#startButton a {
+#startButtonLink {
 	float: right;
 
 	padding-left: 10px;
@@ -44,4 +44,9 @@ body {
 
 #paragraphDelimiterInput {
 	border: 1px solid #ddd;
+}
+
+
+#renderText {
+	display: none;
 }
