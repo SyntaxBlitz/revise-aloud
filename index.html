@@ -6,9 +6,29 @@
 		</title>
 
 		<script src="index.js"></script>
+
+		<style>
+			@import url(index.css);
+		</style>
 	</head>
 
 	<body>
-		
+		<div id="enterText">
+			<div id="topRow">
+				<div id="enterPrompt">
+					Enter the text you'd like to record.
+				</div>
+				<div id="startButton">
+					<a href="#">Start</a>
+				</div>
+			</div>
+			<textarea id="enterField"></textarea>
+			<div id="paragraphDelimiter">
+				Paragraph delimiter regex (default 2 newlines): <input type="text" id="paragraphDelimiterInput">
+			</div>
+		</div>
+		<div id="renderText">
+
+		</div>
 	</body>
 </html>

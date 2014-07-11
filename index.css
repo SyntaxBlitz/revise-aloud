@@ -1,0 +1,47 @@
+body {
+	font-family: sans-serif;
+}
+
+#topRow {
+	width: 800px;
+}
+
+#enterText {
+	margin: 20px;
+}
+
+#enterText #enterPrompt {
+	float: left;
+
+	font-size: 14pt;
+}
+
+#startButton a {
+	float: right;
+
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+
+	text-decoration: none;
+	border: 1px solid #ddd;
+	color: black;
+}
+
+#enterText textarea {
+	width: 800px;
+	height: 400px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+
+	border: 1px solid #ddd;
+}
+
+#bottomRow {
+	width: 800px;
+}
+
+#paragraphDelimiterInput {
+	border: 1px solid #ddd;
+}
