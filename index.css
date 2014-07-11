@@ -50,3 +50,7 @@ body {
 #renderText {
 	display: none;
 }
+
+#stoppedInstructions {
+	display: none;
+}
