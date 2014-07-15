@@ -1,17 +1,25 @@
+var paragraphs;
+var currentParagraph;
+
 window.onload = function () {
 	var startButton = document.getElementById("startButtonLink");
 	startButton.onclick = startProcess;
 };
 
 var startProcess = function () {
-	var paragraphs = getParagraphArray();
+	paragraphs = getParagraphArray();
 	initialiseRecordingInterface();
 
 	showRenderView();
 };
 
 var initialiseRecordingInterface = function () {
+	var currentParagraphDiv = document.getElementById("currentParagraph");
+	currentParagraphDiv.innerText = "Press space to begin.";
 
+	currentParagraph = -1;
+
+	document.onkeydown = documentKeyDown;
 };
 
 var showRenderView = function () {
@@ -31,4 +39,28 @@ var getParagraphArray = function () {
 						"\n\n":
 						delimiterInput.value;
 	return contents.split(new RegExp(delimiter));
+};
+
+var advanceParagraph = function () {
+	if (currentParagraph + 1 < paragraphs.length) {
+		currentParagraph++;
+		
+		var currentParagraphDiv = document.getElementById("currentParagraph");
+		currentParagraphDiv.innerText = paragraphs[currentParagraph];
+	}
+};
+
+var backParagraph = function () {
+	if (currentParagraph > 0)
+		currentParagraph--;
+	var currentParagraphDiv = document.getElementById("currentParagraph");
+	currentParagraphDiv.innerText = paragraphs[currentParagraph];
+}
+
+var documentKeyDown = function (e) {
+	if (e.keyCode === 32) { // SPACE
+		advanceParagraph();
+	} else if (e.keyCode === 37) { // LEFT ARROW
+		backParagraph();
+	}
 };
