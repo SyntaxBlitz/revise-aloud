@@ -58,9 +58,9 @@ var backParagraph = function () {
 }
 
 var documentKeyDown = function (e) {
-	if (e.keyCode === 32) { // SPACE
+	if (e.key === 32 || e.keyCode === 32 || e.which === 32) {			// SPACE
 		advanceParagraph();
-	} else if (e.keyCode === 37) { // LEFT ARROW
+	} else if (e.key === 37 || e.keyCode === 37 || e.which === 37) {	// LEFT ARROW
 		backParagraph();
 	}
 };
