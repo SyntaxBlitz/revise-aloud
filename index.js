@@ -1,9 +1,29 @@
+navigator.getUserMedia = navigator.getUserMedia ||
+							navigator.webkitGetUserMedia ||
+							navigator.mozGetUserMedia ||
+							navigator.msGetUserMedia;
+
 var paragraphs;
 var currentParagraph;
 
 window.onload = function () {
+	initialiseMedia();
+
 	var startButton = document.getElementById("startButtonLink");
 	startButton.onclick = startProcess;
+};
+
+var initialiseMedia = function () {
+	var audioContext = new AudioContext();
+	navigator.getUserMedia({audio: true}, mediaSuccess, mediaError);
+};
+
+var mediaSuccess = function (stream) {
+	
+};
+
+var mediaError = function (e) {
+	console.error(e);
 };
 
 var startProcess = function () {
