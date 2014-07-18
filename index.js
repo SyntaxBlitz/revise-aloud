@@ -3,6 +3,17 @@ navigator.getUserMedia = navigator.getUserMedia ||
 							navigator.mozGetUserMedia ||
 							navigator.msGetUserMedia;
 
+var audioContext;
+
+var SAMPLES = 8192;
+var audioBuffer = [				// left and right channels
+	new Float32Array(0),
+	new Float32Array(0)
+];
+var scriptProcessor;
+
+var isRecording = false;
+
 var paragraphs;
 var currentParagraph;
 
@@ -14,17 +25,57 @@ window.onload = function () {
 };
 
 var initialiseMedia = function () {
-	var audioContext = new AudioContext();
+	audioContext = new AudioContext();
 	navigator.getUserMedia({audio: true}, mediaSuccess, mediaError);
 };
 
 var mediaSuccess = function (stream) {
+	var sourceNode = audioContext.createMediaStreamSource(stream);
+	scriptProcessor = audioContext.createScriptProcessor(SAMPLES, 2, 2);
+	console.log(scriptProcessor);
 	
+	sourceNode.connect(scriptProcessor);
+	scriptProcessor.connect(audioContext.destination);
+
+};
+
+var saveToBuffer = function (inputBuffer) {
+	var newBuffer = [
+		new Float32Array(audioBuffer[0].length + inputBuffer.getChannelData(0).length),
+		new Float32Array(audioBuffer[1].length + inputBuffer.getChannelData(1).length)
+	];
+
+	newBuffer[0].set(audioBuffer[0]);
+	newBuffer[1].set(audioBuffer[1]);
+
+	newBuffer[0].set(inputBuffer.getChannelData(0), audioBuffer[0].length);
+	newBuffer[1].set(inputBuffer.getChannelData(1), audioBuffer[1].length);
+
+	audioBuffer = newBuffer;
 };
 
 var mediaError = function (e) {
 	console.error(e);
 };
+
+var startRecording = function () {
+	isRecording = true;
+	document.getElementById("isRecording").innerText = "Recording!";
+
+	scriptProcessor.onaudioprocess = function (e) {
+		saveToBuffer(e.inputBuffer);
+		// console.log(audioBuffer[0].length);
+	};
+};
+
+var stopRecording = function () {
+	isRecording = false;
+	document.getElementById("isRecording").innerText = "Not recording";
+
+	scriptProcessor.onaudioprocess = function (e) {
+		// hi
+	};
+}
 
 var startProcess = function () {
 	paragraphs = getParagraphArray();
@@ -80,7 +131,15 @@ var backParagraph = function () {
 var documentKeyDown = function (e) {
 	if (e.key === 32 || e.keyCode === 32 || e.which === 32) {			// SPACE
 		advanceParagraph();
+		if (!isRecording)
+			startRecording();
 	} else if (e.key === 37 || e.keyCode === 37 || e.which === 37) {	// LEFT ARROW
 		backParagraph();
+	} else if (e.key === 80 || e.keyCode === 80 || e.which === 80) {	// P KEY
+		console.log("p");
+		if (!isRecording)
+			startRecording();
+		else
+			stopRecording();
 	}
 };
