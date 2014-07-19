@@ -60,7 +60,7 @@ var mediaError = function (e) {
 
 var startRecording = function () {
 	isRecording = true;
-	document.getElementById("isRecording").innerText = "Recording!";
+	document.getElementById("isRecording").textContent = "Recording!";
 
 	scriptProcessor.onaudioprocess = function (e) {
 		saveToBuffer(e.inputBuffer);
@@ -70,7 +70,7 @@ var startRecording = function () {
 
 var stopRecording = function () {
 	isRecording = false;
-	document.getElementById("isRecording").innerText = "Not recording";
+	document.getElementById("isRecording").textContent = "Not recording";
 
 	scriptProcessor.onaudioprocess = function (e) {
 		// hi
@@ -86,7 +86,7 @@ var startProcess = function () {
 
 var initialiseRecordingInterface = function () {
 	var currentParagraphDiv = document.getElementById("currentParagraph");
-	currentParagraphDiv.innerText = "Press space to begin.";
+	currentParagraphDiv.textContent = "Press space to begin.";
 
 	currentParagraph = -1;
 
@@ -117,7 +117,7 @@ var advanceParagraph = function () {
 		currentParagraph++;
 		
 		var currentParagraphDiv = document.getElementById("currentParagraph");
-		currentParagraphDiv.innerText = paragraphs[currentParagraph];
+		currentParagraphDiv.textContent = paragraphs[currentParagraph];
 	}
 };
 
@@ -125,7 +125,7 @@ var backParagraph = function () {
 	if (currentParagraph > 0)
 		currentParagraph--;
 	var currentParagraphDiv = document.getElementById("currentParagraph");
-	currentParagraphDiv.innerText = paragraphs[currentParagraph];
+	currentParagraphDiv.textContent = paragraphs[currentParagraph];
 }
 
 var documentKeyDown = function (e) {
