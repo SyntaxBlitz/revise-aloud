@@ -17,6 +17,8 @@ var isRecording = false;
 var paragraphs;
 var currentParagraph;
 
+var paragraphRanges = [];
+
 window.onload = function () {
 	initialiseMedia();
 
@@ -79,6 +81,8 @@ var stopRecording = function () {
 
 var startProcess = function () {
 	paragraphs = getParagraphArray();
+	createRangeArray();
+
 	initialiseRecordingInterface();
 
 	showRenderView();
@@ -112,7 +116,22 @@ var getParagraphArray = function () {
 	return contents.split(new RegExp(delimiter));
 };
 
+var createRangeArray = function () {
+	for (var i = 0; i < paragraphs.length; i++) {
+		paragraphRanges.push([]);
+	}
+};
+
 var advanceParagraph = function () {
+	var currentFrameCount = audioBuffer[0].length;
+
+	paragraphRanges[currentParagraph].push({
+		start: lastEnd,
+		end: currentFrameCount
+	});
+
+	lastEnd = currentFrameCount;
+
 	if (currentParagraph + 1 < paragraphs.length) {
 		currentParagraph++;
 		
@@ -124,6 +143,9 @@ var advanceParagraph = function () {
 var backParagraph = function () {
 	if (currentParagraph > 0)
 		currentParagraph--;
+
+	lastEnd = audioBuffer[0].length;	// throw out everything in between the last 'space' and now
+
 	var currentParagraphDiv = document.getElementById("currentParagraph");
 	currentParagraphDiv.textContent = paragraphs[currentParagraph];
 }
