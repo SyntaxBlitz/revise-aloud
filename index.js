@@ -158,7 +158,6 @@ var documentKeyDown = function (e) {
 	} else if (e.key === 37 || e.keyCode === 37 || e.which === 37) {	// LEFT ARROW
 		backParagraph();
 	} else if (e.key === 80 || e.keyCode === 80 || e.which === 80) {	// P KEY
-		console.log("p");
 		if (!isRecording)
 			startRecording();
 		else
