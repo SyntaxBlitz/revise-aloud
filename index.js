@@ -137,6 +137,8 @@ var advanceParagraph = function () {
 		
 		var currentParagraphDiv = document.getElementById("currentParagraph");
 		currentParagraphDiv.textContent = paragraphs[currentParagraph];
+	} else {
+
 	}
 };
 
@@ -148,7 +150,18 @@ var backParagraph = function () {
 
 	var currentParagraphDiv = document.getElementById("currentParagraph");
 	currentParagraphDiv.textContent = paragraphs[currentParagraph];
-}
+};
+
+var restartParagraph = function () {
+	var currentFrameCount = audioBuffer[0].length;
+
+	paragraphRanges[currentParagraph].push({
+		start: lastEnd,
+		end: currentFrameCount
+	});
+
+	lastEnd = currentFrameCount;
+};
 
 var documentKeyDown = function (e) {
 	if (e.key === 32 || e.keyCode === 32 || e.which === 32) {			// SPACE
@@ -162,5 +175,7 @@ var documentKeyDown = function (e) {
 			startRecording();
 		else
 			stopRecording();
+	} else if (e.key === 82 || e.keyCode === 82 || e.which === 82) {	// R KEY
+		restartParagraph();
 	}
 };
