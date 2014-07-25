@@ -77,7 +77,7 @@ var stopRecording = function () {
 	scriptProcessor.onaudioprocess = function (e) {
 		// hi
 	};
-}
+};
 
 var startProcess = function () {
 	paragraphs = getParagraphArray();
