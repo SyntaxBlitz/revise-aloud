@@ -1,7 +1,7 @@
 revise-aloud
 ============
 
-a small JavaScript application for recording long sections of text aloud chapter-by-chapter
+a small JavaScript application for recording long sections of text aloud paragraph-by-paragraph
 
 Usage
 -----
