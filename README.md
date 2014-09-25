@@ -5,4 +5,4 @@ a small JavaScript application for recording long sections of text aloud paragra
 
 Usage
 -----
-This needs to be loaded over the Internet (not locally), preferably over HTTPS. Otherwise Chrome won't let the page use the microphone.
+This needs to be loaded from a remote server (anything but a local file path), preferably over HTTPS. Otherwise Chrome won't let the page use the microphone.
