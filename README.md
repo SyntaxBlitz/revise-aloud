@@ -6,3 +6,7 @@ a small JavaScript application for recording long sections of text aloud paragra
 Usage
 -----
 This needs to be loaded from a remote server (anything but a local file path), preferably over HTTPS. Otherwise Chrome won't let the page use the microphone.
+
+License
+-------
+This project is licensed under the MIT license by Timothy Aveni.
